@@ -96,10 +96,6 @@ def avg_v_x(x1, x2):
     return (1/2)*(v_x(x1) + v_x(x2))
 
 
-def avg_a_x(x1, x2):
-    return (1/2)*(a(x1) + a(x2))
-
-
 def calculate_position_with_time(x, speed):
     poly = CubicSpline(x, speed, bc_type="natural")
     antiderivative = poly.antiderivative()
