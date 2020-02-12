@@ -63,8 +63,12 @@ def N(x):
     return M*(g*np.cos(beta(x)) + sentripitalAcc(x))
 
 
+def a(x):
+    return -((g*np.sin(beta(x)))/(1+c))
+
+
 def staticf(x):
-    return (c*M*g*np.sin(beta(x)))/(1 + c)
+    return -(c*M*a(x))
 
 
 def calculate():
@@ -82,3 +86,39 @@ def calculate():
     out["N"] = N(x)
     out["|f/N|"] = abs(staticf(x)/N(x))
     return (xy, out)
+
+
+def v_x(x):
+    return v(x)*np.cos(beta(x))
+
+
+def avg_v_x(x1, x2):
+    return (1/2)*(v_x(x1) + v_x(x2))
+
+
+def avg_a_x(x1, x2):
+    return (1/2)*(a(x1) + a(x2))
+
+
+def calculate_position_with_time(x, speed):
+    poly = CubicSpline(x, speed, bc_type="natural")
+    antiderivative = poly.antiderivative()
+    return antiderivative(x)
+
+
+def calculate_speed_with_time(x):
+    v_t = [0]
+    for i in range(1, len(x)):
+        v_t.append(avg_v_x(x[i-1], x[i]))
+    return v_t
+
+
+def calculate_with_time():
+    xmin = 0.000
+    xmax = 1.401
+    dx = 0.001
+    x = np.arange(xmin, xmax, dx)
+    out = {}
+    out["v_t"] = calculate_speed_with_time(x)
+    out["x_t"] = calculate_position_with_time(x, out["v_t"])
+    return out
