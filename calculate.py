@@ -73,11 +73,12 @@ def calculate():
     dx = 0.001
     x = np.arange(xmin, xmax, dx)
     out = {}
-    out["x"] = x
-    out["y"] = path(x)
-    out["beta"] = beta(x)
+    xy = {}
+    xy["x"] = x
+    xy["y"] = path(x)
+    out["beta"] = np.degrees(beta(x))
     out["k"] = k(x)
     out["v"] = v(x)
     out["N"] = N(x)
     out["|f/N|"] = abs(staticf(x)/N(x))
-    return out
+    return (xy, out)
