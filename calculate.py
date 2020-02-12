@@ -9,20 +9,19 @@ yfast = []
 
 with open("festepunkter.txt") as file:
     fileData = file.read()
-    yfast = literal_eval(fileData)
+    yfast = np.asarray(literal_eval(fileData))
 
 y0 = yfast[0]
 
-h = 200
+h = 0.2
 xfast = np.asarray([0, h, 2*h, 3*h, 4*h, 5*h, 6*h, 7*h])
 
 path = CubicSpline(xfast, yfast, bc_type="natural")
 
 
-# TODO: Replace placeholder value
-objectR = {"ball": 0.01, "hollow_disk": 2}
+objectR = {"ball": 0.0078, "hollow_disk": 0.02475}
 R = objectR["ball"]
-r = 1  # TODO: Replace placeholder value
+r = 0.002175  # TODO: Replace placeholder value
 
 
 objectC = {"ball": 2/5, "hollow_disk": (1 + r**2/R**2)/2}
@@ -74,13 +73,11 @@ def calculate():
     dx = 0.001
     x = np.arange(xmin, xmax, dx)
     out = {}
-    out["path"] = path
+    out["x"] = x
+    out["y"] = path(x)
     out["beta"] = beta(x)
     out["k"] = k(x)
     out["v"] = v(x)
     out["N"] = N(x)
     out["|f/N|"] = abs(staticf(x)/N(x))
     return out
-
-
-print(calculate())
