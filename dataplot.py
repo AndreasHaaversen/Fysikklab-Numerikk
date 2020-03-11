@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 import os
+from statistics import variance
 
 ball_terminal_speed_path = "data/KuleSluttfart"
 ball_full_path = "data/FullBane/kulefullbane.txt"
@@ -39,20 +40,36 @@ def parse_terminal(filename):
     return X, Y
 
 
+def calculate_terminal_variance(filepaths):
+    y_list = []
+    for path in filepaths:
+        X, Y = parse_terminal(path)
+        y_list.append(Y)
+    print(y_list)
+    return variance(y_list)
+
+
 x, y = parse_full(ball_full_path)
+
 
 plt.figure('Ball v(t)', figsize=(12, 3))
 plt.plot(x, y)
+plt.errorbar(
+    x[-1], y[-1], calculate_terminal_variance(ball_terminal_speed_files), 0)
 plt.xlabel('$t$', fontsize=20)
 plt.ylabel('$v$(t)', fontsize=20)
 plt.grid()
 plt.show()
 
-x, y = parse_full(ball_full_path)
+x, y = parse_full(ring_full_path)
 
 plt.figure('Ring v(t)', figsize=(12, 3))
 plt.plot(x, y)
+plt.errorbar(
+    x[-1], y[-1], calculate_terminal_variance(ring_terminal_speed_files), 0)
 plt.xlabel('$t$', fontsize=20)
 plt.ylabel('$v$(t)', fontsize=20)
 plt.grid()
 plt.show()
+
+print(calculate_terminal_variance(ring_terminal_speed_files))
