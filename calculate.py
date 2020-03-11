@@ -2,6 +2,8 @@ import numpy as np
 from scipy.interpolate import CubicSpline
 from ast import literal_eval
 
+selected = "ball"
+
 g = 9.81
 
 yfast = []
@@ -21,14 +23,14 @@ path = CubicSpline(xfast, yfast, bc_type="natural")
 
 objectR = {"ball": 0.0078, "hollow_disk": 0.02475}
 R = objectR["ball"]
-r = 0.002175  # TODO: Replace placeholder value
+r = 0.002175
 
 
 objectC = {"ball": 2/5, "hollow_disk": (1 + r**2/R**2)/2}
 objectM = {"ball": 0.016, "hollow_disk": 0.0127}
 
-c = objectC["ball"]
-M = objectM["ball"]
+c = objectC[selected]
+M = objectM[selected]
 
 
 def y(x):
