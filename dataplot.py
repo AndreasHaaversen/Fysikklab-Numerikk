@@ -61,7 +61,7 @@ graph_size = (12, 5)
 x, y = parse_full(ball_full_path)
 
 plt.figure('Ball v(t)', figsize=graph_size)
-plt.title("Ball speed as a function of time")
+plt.title("Ball fart som en funksjon av tid")
 plt.plot(x, y)
 plt.errorbar(
     x[-1], y[-1], calculate_terminal_variance(ball_terminal_speed_files), 0)
@@ -73,7 +73,7 @@ plt.show()
 x, y = parse_full(ring_full_path)
 
 plt.figure('Ring v(t)', figsize=graph_size)
-plt.title("Ring speed as a function of time")
+plt.title("Ring fart som en funksjon av tid")
 plt.plot(x, y)
 plt.errorbar(
     x[-1], y[-1], calculate_terminal_variance(ring_terminal_speed_files), 0)
@@ -85,16 +85,16 @@ plt.show()
 box_size = (6, 4)
 
 x = get_terminal_speeds(ball_terminal_speed_files)
-plt.figure('Ball terminal speed variance', figsize=box_size)
-plt.title("Ball terminal speed variance")
+plt.figure('Ball terminalfartsvarianse', figsize=box_size)
+plt.title("Ball terminalfartsvarianse")
 
 plt.boxplot(x)
 plt.grid()
 plt.show()
 
 x = get_terminal_speeds(ring_terminal_speed_files)
-plt.figure('Ring terminal speed variance', figsize=box_size)
-plt.title('Ring terminal speed variance')
+plt.figure('Ring terminalfartsvarianse', figsize=box_size)
+plt.title('Ring terminalfartsvarianse')
 plt.boxplot(x)
 plt.grid()
 plt.show()
