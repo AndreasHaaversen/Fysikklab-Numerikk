@@ -2,7 +2,7 @@ import numpy as np
 from scipy.interpolate import CubicSpline
 from ast import literal_eval
 
-selected = "ball"
+selected = "hollow_disk"
 
 g = 9.81
 
@@ -22,7 +22,7 @@ path = CubicSpline(xfast, yfast, bc_type="natural")
 
 
 objectR = {"ball": 0.0078, "hollow_disk": 0.02475}
-R = objectR["ball"]
+R = objectR[selected]
 r = 0.002175
 
 

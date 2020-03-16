@@ -24,7 +24,7 @@ def parse_full(filename):
         for line in file:
             clean_line = line.strip("\n").replace(",", ".").split(";")
             X.append(float(clean_line[0]))
-            Y.append(float(clean_line[3]))
+            Y.append(float(clean_line[3])/100)
 
     return X, Y
 
@@ -35,7 +35,7 @@ def parse_terminal(filename):
         line = whole_file[3]
         clean_line = line.strip("\n").replace(",", ".").split(";")
         X = float(clean_line[0])
-        Y = float(clean_line[3])
+        Y = float(clean_line[3])/100
 
     return X, Y
 
@@ -63,8 +63,6 @@ x, y = parse_full(ball_full_path)
 plt.figure('Ball v(t)', figsize=graph_size)
 plt.title("Ball fart som en funksjon av tid")
 plt.plot(x, y)
-plt.errorbar(
-    x[-1], y[-1], calculate_terminal_variance(ball_terminal_speed_files), 0)
 plt.xlabel('$t$ [s]', fontsize=20)
 plt.ylabel('$v$(t) [m/s]', fontsize=20)
 plt.grid()
@@ -75,8 +73,6 @@ x, y = parse_full(ring_full_path)
 plt.figure('Ring v(t)', figsize=graph_size)
 plt.title("Ring fart som en funksjon av tid")
 plt.plot(x, y)
-plt.errorbar(
-    x[-1], y[-1], calculate_terminal_variance(ring_terminal_speed_files), 0)
 plt.xlabel('$t$ [s]', fontsize=20)
 plt.ylabel('$v$(t) [m/s]', fontsize=20)
 plt.grid()
