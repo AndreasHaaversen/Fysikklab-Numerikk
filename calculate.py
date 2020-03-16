@@ -83,8 +83,8 @@ def calculate():
     xy["x"] = x
     xy["y"] = path(x)
     out["beta"] = (np.degrees(beta(x)), "Banens hellingsvinkel (i grader)")
-    out["k"] = (k(x), "Path curvature som en funksjon av x")
-    out["v"] = (v(x), "Speed som en funksjon av x")
+    out["k"] = (k(x), "Banekrumning som en funksjon av x")
+    out["v"] = (v(x), "Fart som en funksjon av x")
     out["N"] = (N(x), "Normalkraft som en funksjon av x")
     out["|f/N|"] = (abs(staticf(x)/N(x)),
                     "Absolutt forhold mellom friksjonskraft og normalkraft")
