@@ -82,12 +82,12 @@ def calculate():
     xy = {}
     xy["x"] = x
     xy["y"] = path(x)
-    out["beta"] = (np.degrees(beta(x)), "Banens hellingsvinkel (i grader)")
-    out["k"] = (k(x), "Banekrumning som en funksjon av x")
-    out["v"] = (v(x), "Fart som en funksjon av x")
-    out["N"] = (N(x), "Normalkraft som en funksjon av x")
+    out["beta"] = (np.degrees(beta(x)), "Banens hellingsvinkel", "[grader]")
+    out["k"] = (k(x), "Banekrumning som en funksjon av x", "")
+    out["v"] = (v(x), "Fart som en funksjon av x", "[m/s]")
+    out["N"] = (N(x), "Normalkraft som en funksjon av x", "[N]")
     out["|f/N|"] = (abs(staticf(x)/N(x)),
-                    "Absolutt forhold mellom friksjonskraft og normalkraft")
+                    "Absolutt forhold mellom friksjonskraft og normalkraft", "")
     return (xy, out)
 
 
@@ -118,7 +118,8 @@ def calculate_with_time():
     dx = 0.001
     x = np.arange(xmin, xmax, dx)
     out = {}
-    out["v_t"] = (calculate_speed_with_time(x), "Fart som en funksjon av tid")
+    out["v_t"] = (calculate_speed_with_time(
+        x), "Fart som en funksjon av tid", "[m/s]")
     out["x_t"] = (calculate_position_with_time(x, out["v_t"][0]),
-                  "Posisjon som en funksjon av tid")
+                  "Posisjon som en funksjon av tid", "[m]")
     return out
