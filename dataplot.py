@@ -45,14 +45,23 @@ def calculate_terminal_variance(filepaths):
     for path in filepaths:
         X, Y = parse_terminal(path)
         y_list.append(Y)
-    print(y_list)
     return variance(y_list)
 
 
+def get_terminal_speeds(filepaths):
+    y_list = []
+    for path in filepaths:
+        X, Y = parse_terminal(path)
+        y_list.append(Y)
+    return y_list
+
+
+graph_size = (12, 5)
+
 x, y = parse_full(ball_full_path)
 
-
-plt.figure('Ball v(t)', figsize=(12, 3))
+plt.figure('Ball v(t)', figsize=graph_size)
+plt.title("Ball speed as a function of time")
 plt.plot(x, y)
 plt.errorbar(
     x[-1], y[-1], calculate_terminal_variance(ball_terminal_speed_files), 0)
@@ -63,7 +72,8 @@ plt.show()
 
 x, y = parse_full(ring_full_path)
 
-plt.figure('Ring v(t)', figsize=(12, 3))
+plt.figure('Ring v(t)', figsize=graph_size)
+plt.title("Ring speed as a function of time")
 plt.plot(x, y)
 plt.errorbar(
     x[-1], y[-1], calculate_terminal_variance(ring_terminal_speed_files), 0)
@@ -72,4 +82,19 @@ plt.ylabel('$v$(t)', fontsize=20)
 plt.grid()
 plt.show()
 
-print(calculate_terminal_variance(ring_terminal_speed_files))
+box_size = (6, 4)
+
+x = get_terminal_speeds(ball_terminal_speed_files)
+plt.figure('Ball terminal speed variance', figsize=box_size)
+plt.title("Ball terminal speed variance")
+
+plt.boxplot(x)
+plt.grid()
+plt.show()
+
+x = get_terminal_speeds(ring_terminal_speed_files)
+plt.figure('Ring terminal speed variance', figsize=box_size)
+plt.title('Ring terminal speed variance')
+plt.boxplot(x)
+plt.grid()
+plt.show()
