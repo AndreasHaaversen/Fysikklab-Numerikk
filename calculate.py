@@ -119,6 +119,6 @@ def calculate_with_time():
     x = np.arange(xmin, xmax, dx)
     out = {}
     out["v_t"] = (calculate_speed_with_time(x), "Fart som en funksjon av tid")
-    out["x_t"] = (calculate_position_with_time(x, out["v_t"]),
+    out["x_t"] = (calculate_position_with_time(x, out["v_t"][0]),
                   "Posisjon som en funksjon av tid")
     return out
