@@ -2,7 +2,7 @@ import numpy as np
 from scipy.interpolate import CubicSpline
 from ast import literal_eval
 
-selected = "hollow_disk"
+selected = "ball"
 
 g = 9.81
 
