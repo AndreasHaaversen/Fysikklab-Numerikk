@@ -64,7 +64,10 @@ def a(x):
 
 
 def staticf(x):
-    return -(c*M*a(x))
+    maxf = abs(N(x))*my
+    puref = c*M*a(x)
+    f = [-pure if abs(pure) < f else f for pure, f in zip(puref, maxf)]
+    return f
 
 
 def calculate(selected="hollow_disk"):
@@ -104,17 +107,8 @@ def avg_v_x(x1, x2):
     return (1/2)*(v_x(x1) + v_x(x2))
 
 
-def calculate_position_with_time(x, speed):
-    poly = CubicSpline(x, speed, bc_type="natural")
-    antiderivative = poly.antiderivative()
-    return antiderivative(x)
-
-
-def calculate_speed_with_time(x):
-    v_t = [0]
-    for i in range(1, len(x)):
-        v_t.append(avg_v_x(x[i-1], x[i]))
-    return v_t
+def delta_t(x1, x2, dx):
+    return dx/avg_v_x(x1, x2)
 
 
 def calculate_with_time(selected="ball"):
@@ -133,9 +127,6 @@ def calculate_with_time(selected="ball"):
     xmax = 1.401
     dx = 0.001
     x = np.arange(xmin, xmax, dx)
-    out = {}
-    out["v_t"] = (calculate_speed_with_time(
-        x), "Fart som en funksjon av tid", "[m/s]")
-    out["x_t"] = (calculate_position_with_time(x, out["v_t"][0]),
-                  "Posisjon som en funksjon av tid", "[m]")
-    return out
+    ts = [delta_t(x[i-1], x[i], dx) for i in range(1, len(x))]
+    ts.insert(0, 0)
+    return np.cumsum(ts)
