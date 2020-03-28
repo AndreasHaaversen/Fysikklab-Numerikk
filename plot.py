@@ -2,13 +2,15 @@ import matplotlib.pyplot as plt
 
 import calculate
 
-(xy, data) = calculate.calculate()
-time_data = calculate.calculate_with_time()
+plt.rcParams.update({'font.size': 20})
+
+(xy, data) = calculate.calculate(selected="ball")
+time_data = calculate.calculate_with_time(selected="ball")
 
 x = xy["x"]
 y = xy["y"]
 
-graph_size = (12, 6)
+graph_size = (12, 7)
 
 plt.figure('y(x)', figsize=graph_size)
 plt.title("Baneform")

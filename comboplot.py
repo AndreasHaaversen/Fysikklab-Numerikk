@@ -3,7 +3,10 @@ import numpy as np
 import os
 import calculate
 
+plt.rcParams.update({'font.size': 20})
+
 ball_full_path = "data/FullBane/kulefullbane.txt"
+ring_full_path = "data/FullBane/ringfullbane.txt"
 
 
 def parse_full_x(filename):
@@ -20,7 +23,7 @@ def parse_full_x(filename):
     return X, Y
 
 
-data = calculate.calculate_with_time()
+data = calculate.calculate_with_time(selected="ball")
 
 calc_y = data["x_t"][0]
 xmin = 0.000
@@ -30,7 +33,7 @@ x = np.arange(xmin, xmax, dx)
 
 obs_x, obs_y = parse_full_x(ball_full_path)
 
-graph_size = (12, 6)
+graph_size = (12, 7)
 
 
 plt.figure('Posisjon i x-aksen som funksjon av tid', figsize=graph_size)

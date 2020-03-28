@@ -2,8 +2,6 @@ import numpy as np
 from scipy.interpolate import CubicSpline
 from ast import literal_eval
 
-selected = "ball"
-
 g = 9.81
 
 yfast = []
@@ -22,15 +20,11 @@ path = CubicSpline(xfast, yfast, bc_type="natural")
 
 
 objectR = {"ball": 0.0078, "hollow_disk": 0.02475}
-R = objectR[selected]
+R = 0
 r = 0.002175
-
-
-objectC = {"ball": 2/5, "hollow_disk": (1 + r**2/R**2)/2}
-objectM = {"ball": 0.016, "hollow_disk": 0.0127}
-
-c = objectC[selected]
-M = objectM[selected]
+c = 0
+M = 0
+my = 0
 
 
 def y(x):
@@ -73,7 +67,18 @@ def staticf(x):
     return -(c*M*a(x))
 
 
-def calculate():
+def calculate(selected="hollow_disk"):
+    global R
+    R = objectR[selected]
+    objectC = {"ball": 2/5, "hollow_disk": (1 + r**2/R**2)/2}
+    objectM = {"ball": 0.016, "hollow_disk": 0.0127}
+    objectMy = {"ball": 0.5, "hollow_disk": 0.25}
+    global c
+    c = objectC[selected]
+    global M
+    M = objectM[selected]
+    global my
+    my = objectMy[selected]
     xmin = 0.000
     xmax = 1.401
     dx = 0.001
@@ -83,9 +88,9 @@ def calculate():
     xy["x"] = x
     xy["y"] = path(x)
     out["beta"] = (np.degrees(beta(x)), "Banens hellingsvinkel", "[grader]")
-    out["k"] = (k(x), "Banekrumning som en funksjon av x", "")
-    out["v"] = (v(x), "Fart som en funksjon av x", "[m/s]")
-    out["N"] = (N(x), "Normalkraft som en funksjon av x", "[N]")
+    out["k"] = (k(x), "Banekrumning som funksjon av x", "")
+    out["v"] = (v(x), "Fart som funksjon av x", "[m/s]")
+    out["N"] = (N(x), "Normalkraft som funksjon av x", "[N]")
     out["|f/N|"] = (abs(staticf(x)/N(x)),
                     "Absolutt forhold mellom friksjonskraft og normalkraft", "")
     return (xy, out)
@@ -112,7 +117,18 @@ def calculate_speed_with_time(x):
     return v_t
 
 
-def calculate_with_time():
+def calculate_with_time(selected="ball"):
+    global R
+    R = objectR[selected]
+    objectC = {"ball": 2/5, "hollow_disk": (1 + r**2/R**2)/2}
+    objectM = {"ball": 0.016, "hollow_disk": 0.0127}
+    objectMy = {"ball": 0.5, "hollow_disk": 0.25}
+    global c
+    c = objectC[selected]
+    global M
+    M = objectM[selected]
+    global my
+    my = objectMy[selected]
     xmin = 0.000
     xmax = 1.401
     dx = 0.001
