@@ -25,7 +25,7 @@ def parse_full_x(filename):
 
 data = calculate.calculate_with_time(selected="ball")
 
-calc_y = data["x_t"][0]
+ts = data
 xmin = 0.000
 xmax = 1.401
 dx = 0.001
@@ -38,7 +38,7 @@ graph_size = (12, 7)
 
 plt.figure('Posisjon i x-aksen som funksjon av tid', figsize=graph_size)
 plt.title("Posisjon i x-aksen som funksjon av tid")
-plt.plot(x, calc_y)
+plt.plot(ts, x)
 plt.plot(obs_x, obs_y)
 plt.legend(["Beregnet posisjon", "Observert posisjon"])
 plt.xlabel('$t$ [s]', fontsize=20)
