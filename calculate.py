@@ -21,7 +21,7 @@ path = CubicSpline(xfast, yfast, bc_type="natural")
 
 objectR = {"ball": 0.0078, "hollow_disk": 0.02475}
 R = 0
-r = 0.002175
+r = 0.02175
 c = 0
 M = 0
 my = 0
