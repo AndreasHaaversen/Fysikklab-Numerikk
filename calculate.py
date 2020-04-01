@@ -44,7 +44,7 @@ def v(x):
 
 
 def k(x):
-    return der2Y(x)/((1+derY(x)**2)**(3/2))
+    return abs(der2Y(x))/((1+derY(x)**2)**(3/2))
 
 
 def sentripitalAcc(x):
