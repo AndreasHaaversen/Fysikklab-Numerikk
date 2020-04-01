@@ -44,7 +44,7 @@ def v(x):
 
 
 def k(x):
-    return der2Y(x)/((1+derY(x)**2)**(3/2))
+    return abs(der2Y(x))/((1+derY(x)**2)**(3/2))
 
 
 def sentripitalAcc(x):
@@ -88,7 +88,7 @@ def calculate(selected="hollow_disk"):
     xy["x"] = x
     xy["y"] = path(x)
     out["beta"] = (np.degrees(beta(x)), "Banens hellingsvinkel", "[grader]")
-    out["k"] = (k(x), "Banekrumning som funksjon av x", "")
+    out["k"] = (k(x), "Banekrumning som funksjon av posisjon", "[1/m]")
     out["v"] = (v(x), "Fart som funksjon av x", "[m/s]")
     out["N"] = (N(x), "Normalkraft som funksjon av x", "[N]")
     out["|f/N|"] = (abs(staticf(x)/N(x)),
